@@ -25,9 +25,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
-        {children}
+        <div className="w-screen h-screen overflow-hidden flex flex-col bg-linear-to-tr from-fuchsia-800 to-indigo-800">
+          <header className="w-screen h-14">
+
+          </header>
+          <div className="w-full h-[calc(100vh-56px)] flex">
+            <nav className="h-full md:w-14 md:flex md:flex-col items-center overflow-y-scroll">
+
+            </nav>
+            <main className="flex-1 bg-background md:rounded-xl md:mb-2 md:mr-2">
+
+            </main>
+          </div>
+          {children}
+        </div>
       </body>
     </html>
   );
