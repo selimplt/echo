@@ -13,25 +13,25 @@ const Navbar = () => {
     return (
         <div className='w-full h-fit flex flex-col items-center px-2 gap-2'>
             <Link href={'/'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/' ? 'bg-background-5' : ''}`}>
-                <FaHome className='text-[#ddd5f5] text-2xl' />
+                <FaHome className='text-[#d6d5f0] text-2xl' />
             </Link>
             <Link href={'/messages'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/messages' ? 'bg-background-5' : ''}`}>
-                <AiFillMessage className='text-[#ddd5f5] text-2xl' />
+                <AiFillMessage className='text-[#d6d5f0] text-2xl' />
             </Link>
             <Link href={'/servers'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/servers' ? 'bg-background-5' : ''}`}>
-                <FaServer className='text-[#ddd5f5] text-2xl' />
+                <FaServer className='text-[#d6d5f0] text-2xl' />
             </Link>
             <Link href={'/friends'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/friends' ? 'bg-background-5' : ''}`}>
-                <FaUserFriends className='text-[#ddd5f5] text-2xl' />
+                <FaUserFriends className='text-[#d6d5f0] text-2xl' />
             </Link>
             <Link href={'/search'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/search' ? 'bg-background-5' : ''}`}>
-                <TbWorld className='text-[#ddd5f5] text-2xl' />
+                <TbWorld className='text-[#d6d5f0] text-2xl' />
             </Link>
             <Link href={'/settings'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/settings' ? 'bg-background-5' : ''}`}>
-                <IoSettingsSharp className='text-[#ddd5f5] text-2xl' />
+                <IoSettingsSharp className='text-[#d6d5f0] text-2xl' />
             </Link>
             <div className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all cursor-pointer`}>
-                <FaPlus className='text-[#ddd5f5] text-2xl' />
+                <FaPlus className='text-[#d6d5f0] text-2xl' />
             </div>
         </div>
     )

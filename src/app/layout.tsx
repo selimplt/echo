@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider"
-import "./globals.css";
+import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
 
@@ -44,7 +44,7 @@ export default function RootLayout({
               <nav className="h-full hidden md:w-14 md:flex md:flex-col items-center justify-start overflow-y-scroll">
                 <Navbar />
               </nav>
-              <main className="flex-1 bg-background md:rounded-xl md:mb-2 md:mr-2">
+              <main className="flex-1 bg-background md:rounded-xl md:mb-2 md:mr-2 overflow-y-scroll">
                 {children}
               </main>
             </div>
