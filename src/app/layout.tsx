@@ -44,9 +44,14 @@ export default function RootLayout({
               <nav className="h-full hidden md:w-fit md:flex md:flex-col items-center justify-start overflow-y-scroll">
                 <Navbar />
               </nav>
-              <main className="flex-1 bg-background md:rounded-xl md:mb-2 md:mr-2 overflow-y-scroll">
-                {children}
-              </main>
+              <div className="flex-1 flex pb-2 pr-2 gap-2">
+                <main className="flex-1 bg-background md:rounded-xl">
+                  {children}
+                </main>
+                <div className="h-full w-72 bg-card rounded-lg">
+
+                </div>
+              </div>
             </div>
           </div>
         </ThemeProvider>
