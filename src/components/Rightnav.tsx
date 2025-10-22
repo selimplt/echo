@@ -12,7 +12,7 @@ const Rightnav = () => {
         )
     }
     return (
-        <div></div>
+        <div className='hidden'></div>
     )
 }
 

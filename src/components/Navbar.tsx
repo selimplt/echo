@@ -18,9 +18,6 @@ const Navbar = () => {
             <Link href={'/servers'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/servers' ? 'bg-background-5' : ''}`}>
                 <FaServer className='text-[#d6d5f0] text-2xl' />
             </Link>
-            <Link href={'/friends'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/friends' ? 'bg-background-5' : ''}`}>
-                <FaUserFriends className='text-[#d6d5f0] text-2xl' />
-            </Link>
             <Link href={'/search'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/search' ? 'bg-background-5' : ''}`}>
                 <TbWorld className='text-[#d6d5f0] text-2xl' />
             </Link>
