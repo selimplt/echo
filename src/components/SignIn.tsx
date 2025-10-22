@@ -25,12 +25,11 @@ const SignIn = () => {
         try {
             const res = await axios.post('/api/auth/signin', data);
             const { message, error }: any = res.data;
-            const user_data: any = res.data;
             if (message) {
                 setSuccessMessage(message || "giriş başarılı");
                 setErrorMessage(null);
-                console.log(user_data.user_data)
                 router.push("/");
+                window.location.reload();
             }
             if (error) {
                 setErrorMessage(error || "giriş başarılı");

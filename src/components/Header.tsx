@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import useAuthStore from '@/store/userstor'
 
 const Header = () => {
     const pathname = usePathname();
@@ -14,6 +15,7 @@ const Header = () => {
     const [pt, SetPt] = useState<string>("");
     const [signed, SetSigned] = useState<boolean>(true);
     const router = useRouter();
+    const { user, fetchUser, logout, isLoading, error } = useAuthStore();
 
     const handleSignOut = async () => {
         try {
@@ -24,6 +26,10 @@ const Header = () => {
             alert("Çıkış yapılamadı!");
         }
     };
+
+    useEffect(() => {
+        fetchUser();
+    }, [fetchUser]);
 
     useEffect(() => {
         switch (pathname) {
@@ -69,9 +75,9 @@ const Header = () => {
                     </DropdownMenuContent>
                 </DropdownMenu>
                 {
-                    signed ? (
+                    user ? (
                         <Popover>
-                            <PopoverTrigger className='hover:bg-background-5 transition-all cursor-pointer px-4 rounded-lg h-10 gap-2 text-[#d6d5f0] font-semibold flex items-center'>Kullanıcı adı <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'><FaUser className='text-[#262330]' /></div></PopoverTrigger>
+                            <PopoverTrigger className='hover:bg-background-5 transition-all cursor-pointer px-4 rounded-lg h-10 gap-2 text-[#d6d5f0] font-semibold flex items-center'>{user.seen_name} <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'><FaUser className='text-[#262330]' /></div></PopoverTrigger>
                             <PopoverContent className='flex flex-col'>
                                 <button onClick={handleSignOut} className='hover:bg-background cursor-pointer p-2 flex items-start font-semibold rounded-lg transition-all'>Çıkış yap</button>
                             </PopoverContent>

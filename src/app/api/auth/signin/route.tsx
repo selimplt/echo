@@ -21,8 +21,8 @@ export const POST = async (req: Request) => {
         if (!comp) {
             return NextResponse.json({ error: "Şifre yanlış" }, { status: 401 });
         }
-        const token = jwt.sign({ user_name: data.user_name }, process.env.JWT_KEY!, { expiresIn: "7d" });
-        const response = NextResponse.json({ message: "Giriş başarılı", user_data: data }, { status: 200 });
+        const token = jwt.sign({ id: data.id, seen_name: data.seen_name, user_name: data.user_name, profile_img: data.profile_img, bio: data.bio }, process.env.JWT_KEY!, { expiresIn: "7d" });
+        const response = NextResponse.json({ message: "Giriş başarılı" }, { status: 200 });
         response.cookies.set("token", token, {
             httpOnly: true,
             maxAge: 60 * 60 * 24 * 7,
