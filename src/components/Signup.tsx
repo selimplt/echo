@@ -4,6 +4,7 @@ import { Button } from './ui/button'
 import z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
 
 const schema = z.object({
     name: z.string().min(2).max(36),
@@ -24,7 +25,21 @@ const Signup = () => {
     })
 
     const onSubmit = async (data: z.infer<typeof schema>) => {
-
+        try {
+            const res = await axios.post('/api/auth/signup', data);
+            const { message, error }: any = res.data;
+            if (message) {
+                setSuccessMessage(message || "kayıt başarılı");
+                setErrorMessage(null);
+            }
+            if (error) {
+                setErrorMessage(error || "kayıt başarılı");
+                setSuccessMessage(null);
+            }
+        } catch (error: any) {
+            setErrorMessage("hata");
+            setSuccessMessage(null);
+        }
     }
 
     return (

@@ -5,9 +5,10 @@ import z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 const schema = z.object({
-    user_name: z.string().email(),
+    user_name: z.string().min(2).max(36),
     password: z.string().min(6).max(100),
 })
 
@@ -21,7 +22,24 @@ const SignIn = () => {
     })
 
     const onSubmit = async (data: z.infer<typeof schema>) => {
-
+        try {
+            const res = await axios.post('/api/auth/signin', data);
+            const { message, error }: any = res.data;
+            const user_data: any = res.data;
+            if (message) {
+                setSuccessMessage(message || "giriş başarılı");
+                setErrorMessage(null);
+                console.log(user_data.user_data)
+                router.push("/");
+            }
+            if (error) {
+                setErrorMessage(error || "giriş başarılı");
+                setSuccessMessage(null);
+            }
+        } catch (error: any) {
+            setErrorMessage("hata :");
+            setSuccessMessage(null);
+        }
     }
 
     return (
