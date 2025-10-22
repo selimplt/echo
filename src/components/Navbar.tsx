@@ -15,9 +15,6 @@ const Navbar = () => {
             <Link href={'/'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/' ? 'bg-background-5' : ''}`}>
                 <FaHome className='text-[#d6d5f0] text-2xl' />
             </Link>
-            <Link href={'/messages'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/messages' ? 'bg-background-5' : ''}`}>
-                <AiFillMessage className='text-[#d6d5f0] text-2xl' />
-            </Link>
             <Link href={'/servers'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/servers' ? 'bg-background-5' : ''}`}>
                 <FaServer className='text-[#d6d5f0] text-2xl' />
             </Link>

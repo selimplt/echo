@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
+import Rightnav from "@/components/Rightnav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,12 +45,12 @@ export default function RootLayout({
               <nav className="h-full hidden md:w-fit md:flex md:flex-col items-center justify-start overflow-y-scroll">
                 <Navbar />
               </nav>
-              <div className="flex-1 flex pb-2 pr-2 gap-2">
+              <div className="flex-1 flex md:pb-2 md:pr-2 gap-2">
                 <main className="flex-1 bg-background md:rounded-xl">
                   {children}
                 </main>
-                <div className="h-full w-72 bg-card rounded-lg">
-
+                <div className="h-full hidden md:flex md:flex-col md:w-fit bg-card rounded-lg overflow-y-scroll">
+                  <Rightnav />
                 </div>
               </div>
             </div>
