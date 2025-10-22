@@ -17,6 +17,9 @@ const Header = () => {
             case "/":
                 SetPt("Ana Sayfa");
                 break;
+            case "/auth":
+                SetPt("Giriş yap veya Üye ol");
+                break;
             default:
                 SetPt("");
                 break;

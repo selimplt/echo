@@ -41,7 +41,7 @@ export default function RootLayout({
               <Header />
             </header>
             <div className="w-full h-[calc(100vh-56px)] flex">
-              <nav className="h-full hidden md:w-14 md:flex md:flex-col items-center justify-start overflow-y-scroll">
+              <nav className="h-full hidden md:w-fit md:flex md:flex-col items-center justify-start overflow-y-scroll">
                 <Navbar />
               </nav>
               <main className="flex-1 bg-background md:rounded-xl md:mb-2 md:mr-2 overflow-y-scroll">

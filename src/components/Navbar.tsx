@@ -11,7 +11,7 @@ const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname()
     return (
-        <div className='w-full h-fit flex flex-col items-center px-2 gap-2'>
+        <div className={`${pathname === '/auth' ? `hidden w-0` : `w-14 h-fit flex flex-col items-center px-2 gap-2`}`}>
             <Link href={'/'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/' ? 'bg-background-5' : ''}`}>
                 <FaHome className='text-[#d6d5f0] text-2xl' />
             </Link>
