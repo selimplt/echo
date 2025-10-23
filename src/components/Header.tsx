@@ -77,7 +77,18 @@ const Header = () => {
                 {
                     user ? (
                         <Popover>
-                            <PopoverTrigger className='hover:bg-background-5 transition-all cursor-pointer px-4 rounded-lg h-10 gap-2 text-[#d6d5f0] font-semibold flex items-center'>{user.seen_name} <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'><FaUser className='text-[#262330]' /></div></PopoverTrigger>
+                            <PopoverTrigger className='hover:bg-background-5 transition-all cursor-pointer px-4 rounded-lg h-10 gap-2 text-[#d6d5f0] font-semibold flex items-center'>
+                                {user.seen_name}
+                                <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'>
+                                    {
+                                        user.profile_img ? (
+                                            <img src={user.profile_img} alt="profil fotosu" className='rounded-full' />
+                                        ) : (
+                                            <FaUser className='text-[#262330]' />
+                                        )
+                                    }
+                                </div>
+                            </PopoverTrigger>
                             <PopoverContent className='flex flex-col'>
                                 <button onClick={handleSignOut} className='hover:bg-background cursor-pointer p-2 flex items-start font-semibold rounded-lg transition-all'>Çıkış yap</button>
                             </PopoverContent>
