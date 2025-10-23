@@ -25,7 +25,15 @@ const Mainpagenav = () => {
     }
 
     const reject = async (id: string) => {
-        console.log(id)
+        try {
+            const res = await axios.post<any>("/api/friends/reject", { id })
+            if (res.data.message == "başarılı") {
+                window.location.reload();
+            }
+        }
+        catch (error: any) {
+            console.log(error);
+        }
     }
 
     return (
@@ -73,7 +81,7 @@ const Mainpagenav = () => {
                                         }
                                     </div>
                                     <p className='font-semibold truncate flex-1'>{f.users.user_name}</p>
-                                    <button onClick={() => accept(f.id)} className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
+                                    <button onClick={() => accept(f.users.id)} className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
                                         <FaPlus className='text-green-600 text-sm' />
                                     </button>
                                     <button onClick={() => reject(f.id)} className='w-5 h-5 border-red-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
