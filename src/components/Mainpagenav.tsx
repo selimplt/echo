@@ -19,6 +19,15 @@ const Mainpagenav = () => {
         }
         getfriends();
     }, [])
+
+    const accept = async (id: string) => {
+        console.log(id)
+    }
+
+    const reject = async (id: string) => {
+        console.log(id)
+    }
+
     return (
         <div className='w-72 h-fit flex flex-col gap-2'>
             <div className='w-full h-10 bg-background rounded-t-lg flex items-center justify-center'>
@@ -64,10 +73,10 @@ const Mainpagenav = () => {
                                         }
                                     </div>
                                     <p className='font-semibold truncate flex-1'>{f.users.user_name}</p>
-                                    <button className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
+                                    <button onClick={() => accept(f.id)} className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
                                         <FaPlus className='text-green-600 text-sm' />
                                     </button>
-                                    <button className='w-5 h-5 border-red-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
+                                    <button onClick={() => reject(f.id)} className='w-5 h-5 border-red-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
                                         <FaMinus className='text-red-600 text-sm' />
                                     </button>
                                 </div>

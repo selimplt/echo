@@ -7,15 +7,16 @@ import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import usePageStore from '@/store/pagestore'
 import useAuthStore from '@/store/userstor'
 
 const Header = () => {
     const pathname = usePathname();
     const { setTheme } = useTheme();
-    const [pt, SetPt] = useState<string>("");
     const [signed, SetSigned] = useState<boolean>(true);
     const router = useRouter();
     const { user, fetchUser, logout, isLoading, error } = useAuthStore();
+    const pagename = usePageStore((state) => state.pagename);
 
     const handleSignOut = async () => {
         try {
@@ -31,27 +32,13 @@ const Header = () => {
         fetchUser();
     }, [fetchUser]);
 
-    useEffect(() => {
-        switch (pathname) {
-            case "/":
-                SetPt("Ana Sayfa");
-                break;
-            case "/auth":
-                SetPt("Giriş yap veya Üye ol");
-                break;
-            default:
-                SetPt("");
-                break;
-        }
-    }, [])
-
     return (
         <div className='relative w-full h-full flex items-center justify-between p-2 gap-2'>
             <div className='h-full w-fit flex items-center justify-center gap-2'>
                 <p className='text-2xl text-[#d6d5f0] font-bold font-serif'>ECHO</p>
             </div>
             <div className='absolute right-1/2 translate-x-1/2'>
-                <p className='hidden md:flex text-[#d6d5f0] font-semibold text-md'>{pt}</p>
+                <p className='hidden md:flex text-[#d6d5f0] font-semibold text-md'>{pagename! || ""}</p>
             </div>
             <div className='h-full w-fit flex items-center justify-center gap-2'>
                 <DropdownMenu>

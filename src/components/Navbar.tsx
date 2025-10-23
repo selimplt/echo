@@ -1,15 +1,34 @@
 'use client'
-import React from 'react'
-import { FaHome, FaPlus, FaUserFriends, FaServer } from "react-icons/fa";
+import React, { useState, useEffect } from 'react'
+import { FaHome, FaPlus, FaServer } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
-import { AiFillMessage } from "react-icons/ai";
 import { IoSettingsSharp } from "react-icons/io5";
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import useAuthStore from '@/store/userstor';
 
 const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname()
+    const { user, fetchUser, logout, isLoading, error } = useAuthStore();
+    const [svName, SetSvName] = useState<string>("");
+
+    useEffect(() => {
+        SetSvName(`${user?.seen_name} sunucusu` || "");
+    }, [user])
+
     return (
         <div className={`${pathname === '/auth' ? `hidden w-0` : `w-14 h-fit flex flex-col items-center px-2 gap-2`}`}>
             <Link href={'/'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/' ? 'bg-background-5' : ''}`}>
@@ -24,9 +43,39 @@ const Navbar = () => {
             <Link href={'/settings'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/settings' ? 'bg-background-5' : ''}`}>
                 <IoSettingsSharp className='text-[#d6d5f0] text-2xl' />
             </Link>
-            <div className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all cursor-pointer`}>
-                <FaPlus className='text-[#d6d5f0] text-2xl' />
-            </div>
+            <Dialog>
+                <form action="">
+                    <DialogTrigger>
+                        <div className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all cursor-pointer`}>
+                            <FaPlus className='text-[#d6d5f0] text-2xl' />
+                        </div>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                            <DialogTitle>Sunucu oluştur</DialogTitle>
+                            <DialogDescription>
+                                Kendine ait bir sunucu oluştur ve insanları davet et
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4">
+                            <div className="grid gap-3">
+                                <label htmlFor="sv_name">Sunucu adı</label>
+                                <Input id="sv_name" name="sv_name" value={svName} onChange={(e) => SetSvName(e.target.value)} />
+                            </div>
+                            <div className="grid gap-3">
+                                <label htmlFor="sv_description">Sunucu açıklaması</label>
+                                <Input id="sv_description" name="sv_description" defaultValue="Merhaba, sunucuma hoş geldiniz." />
+                            </div>
+                        </div>
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <Button >İptal et</Button>
+                            </DialogClose>
+                            <Button type="submit">Oluştur</Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </form>
+            </Dialog>
         </div>
     )
 }

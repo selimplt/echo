@@ -4,12 +4,18 @@ import { useRouter } from 'next/navigation'
 import axios from "axios";
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
+import usePageStore from "@/store/pagestore";
 
 export default function Home() {
   const [loading, SetLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const setPageName = usePageStore((state) => state.setPageName);
   const [followers, setFollowers] = useState<any[]>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    setPageName("Ana Sayfa");
+  }, [setPageName]);
 
   useEffect(() => {
     const cntrl = async () => {
