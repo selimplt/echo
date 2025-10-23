@@ -12,8 +12,8 @@ const Mainpagenav = () => {
                 <div className='flex flex-col gap-2'>
                     <div className='bg-background rounded-lg p-2 flex-col gap-2'>
                         <div className='w-full h-fit flex gap-2'>
-                            <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'>
-                                <FaUser className='text-[#262330]' />
+                            <div className='w-7 h-7 bg-foreground rounded-full flex items-center justify-center'>
+                                <FaUser className='text-background' />
                             </div>
                             <p className='font-semibold truncate flex-1'>Arkadaş 1</p>
                         </div>
@@ -21,8 +21,8 @@ const Mainpagenav = () => {
                     </div>
                     <div className='bg-background rounded-lg p-2 flex-col gap-2'>
                         <div className='w-full h-fit flex gap-2'>
-                            <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'>
-                                <FaUser className='text-[#262330]' />
+                            <div className='w-7 h-7 bg-foreground rounded-full flex items-center justify-center'>
+                                <FaUser className='text-background' />
                             </div>
                             <p className='font-semibold truncate flex-1'>Arkadaş 2 aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                         </div>
@@ -34,8 +34,8 @@ const Mainpagenav = () => {
                 <p className='font-semibold ml-2'>Arkadaşlık istekleri</p>
                 <div className='flex flex-col gap-2'>
                     <div className='bg-background rounded-lg p-2 flex gap-2'>
-                        <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'>
-                            <FaUser className='text-[#262330]' />
+                        <div className='w-7 h-7 bg-foreground rounded-full flex items-center justify-center'>
+                            <FaUser className='text-background' />
                         </div>
                         <p className='font-semibold truncate flex-1'>Arkadaş 1</p>
                         <button className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
@@ -46,8 +46,8 @@ const Mainpagenav = () => {
                         </button>
                     </div>
                     <div className='bg-background rounded-lg p-2 flex gap-2'>
-                        <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'>
-                            <FaUser className='text-[#262330]' />
+                        <div className='w-7 h-7 bg-foreground rounded-full flex items-center justify-center'>
+                            <FaUser className='text-background' />
                         </div>
                         <p className='font-semibold truncate flex-1'>Arkadaş 2 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                         <button className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>

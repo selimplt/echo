@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation'
 import axios from "axios";
-import { boolean } from "zod";
+import Link from "next/link";
+import { FaUser } from "react-icons/fa";
 
 export default function Home() {
   const [loading, SetLoading] = useState<boolean>(true);
@@ -47,14 +48,21 @@ export default function Home() {
     <div className="w-full h-fit p-2 md:p-4">
       <p className="font-semibold text-xl">Tüm arkadaşlar</p>
       {followers.length === 0 ? (
-        <p className="text-gray-500">Henüz arkadaşın yok 😢</p>
+        <p className="text-gray-500">Henüz arkadaşın yok</p>
       ) : (
-        <div className="flex flex-col gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-2">
           {followers.map((f) => (
-            <div key={f.id} className="p-2 bg-white rounded-md shadow-sm border">
-              <p className="font-medium">{f.name}</p>
-              <p className="text-sm text-gray-500">{f.email}</p>
-            </div>
+            f.status == 'accepted' ? (
+              <Link href={"/"} key={f.id} className="p-2 bg-card rounded-lg flex flex-col">
+                <div className="w-full h-fit flex items-center gap-2">
+                  <div className='w-12 h-12 bg-foreground rounded-full flex items-center justify-center'>
+                    <FaUser className='text-background text-2xl' />
+                  </div>
+                  <p className="font-semibold truncate">{f.users.user_name}</p>
+                </div>
+                <p className="text-sm text-gray-500 truncate ml-14">{f.users.bio}</p>
+              </Link>
+            ) : null
           ))}
         </div>
       )}

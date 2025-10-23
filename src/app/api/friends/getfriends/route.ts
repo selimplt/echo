@@ -15,14 +15,13 @@ export const GET = async () => {
         const decoded = jwt.verify(token, secret) as JwtPayload;
         const userId = decoded.id;
 
-        const { error, data } = await supabase.from("follows").select(`follower_id,users!follower_id(*)`).eq("following_id", userId);
-
+        const { error, data } = await supabase.from("follows").select(`id,follower_id,following_id,created_at,status,users!follower_id(*)`).eq("following_id", userId);
         if (error) {
             console.error(error);
             return NextResponse.json({ error: "Veri çekme hatası" }, { status: 500 });
         }
 
-        return NextResponse.json({ followers: data.map((f) => f.users) }, { status: 200 });
+        return NextResponse.json({ followers: data.map((f) => f) }, { status: 200 });
     } catch (error: any) {
         return NextResponse.json({ error: "HATA" }, { status: 401 });
     }

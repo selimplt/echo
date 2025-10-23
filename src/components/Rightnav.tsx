@@ -11,6 +11,11 @@ const Rightnav = () => {
             <Mainpagenav />
         )
     }
+    if (path === "/servers") {
+        return (
+            <Mainpagenav />
+        )
+    }
     return (
         <div className='hidden'></div>
     )
