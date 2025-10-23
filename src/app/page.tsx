@@ -62,7 +62,13 @@ export default function Home() {
               <Link href={"/"} key={f.id} className="p-2 bg-card rounded-lg flex flex-col">
                 <div className="w-full h-fit flex items-center gap-2">
                   <div className='w-12 h-12 bg-foreground rounded-full flex items-center justify-center'>
-                    <FaUser className='text-background text-2xl' />
+                    {
+                      f.users.profile_img ? (
+                        <img src={f.users.profile_img} alt="profil fotosu" className='rounded-full' />
+                      ) : (
+                        <FaUser className='text-background text-2xl' />
+                      )
+                    }
                   </div>
                   <p className="font-semibold truncate">{f.users.user_name}</p>
                 </div>

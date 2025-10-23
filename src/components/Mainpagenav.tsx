@@ -20,8 +20,16 @@ const Mainpagenav = () => {
         getfriends();
     }, [])
 
-    const accept = async (id: string) => {
-        console.log(id)
+    const accept = async (id: string, reqid: string) => {
+        try {
+            const res = await axios.post<any>("/api/friends/accept", { id, reqid })
+            if (res.data.message == "başarılı") {
+                window.location.reload();
+            }
+        }
+        catch (error: any) {
+            console.log(error);
+        }
     }
 
     const reject = async (id: string) => {
@@ -81,7 +89,7 @@ const Mainpagenav = () => {
                                         }
                                     </div>
                                     <p className='font-semibold truncate flex-1'>{f.users.user_name}</p>
-                                    <button onClick={() => accept(f.users.id)} className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
+                                    <button onClick={() => accept(f.users.id, f.id)} className='w-5 h-5 border-green-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
                                         <FaPlus className='text-green-600 text-sm' />
                                     </button>
                                     <button onClick={() => reject(f.id)} className='w-5 h-5 border-red-600 opacity-50 border rounded-full flex items-center justify-center cursor-pointer hover:opacity-90 transition-all'>
