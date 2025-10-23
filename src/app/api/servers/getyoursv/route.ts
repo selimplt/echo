@@ -9,19 +9,19 @@ export const GET = async () => {
         const token = (await cookieStore).get("token")?.value;
 
         if (!token) {
-            return NextResponse.json({ valid: false, error: "HATA 1" }, { status: 401 });
+            return NextResponse.json({ error: "yetkisiz" }, { status: 401 });
         }
+
         const secret = process.env.JWT_KEY!;
         const decoded = jwt.verify(token, secret) as JwtPayload;
         const userId = decoded.id;
 
-        const { error, data } = await supabase.from("follows").select(`id,follower_id,following_id,created_at,status,users!follower_id(*)`).eq("following_id", userId);
+        const { error, data } = await supabase.from("memberships").select("*,servers:sv_id(*)").eq("user_id", userId);
         if (error) {
             return NextResponse.json({ error: "Veri çekme hatası" }, { status: 500 });
         }
-
-        return NextResponse.json({ followers: data.map((f) => f) }, { status: 200 });
+        return NextResponse.json({ memberships: data }, { status: 200 });
     } catch (error: any) {
-        return NextResponse.json({ error: "HATA" }, { status: 401 });
+        return NextResponse.json({ error: "HATA" }, { status: 500 });
     }
-};
+}

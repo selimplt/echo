@@ -20,9 +20,14 @@ export const POST = async (req: Request) => {
         const decoded = jwt.verify(token, secret) as JwtPayload;
         const userId = decoded.id;
 
-        const { error } = await supabase.from("servers").insert([{ "sv_name": svName, "sv_description": svDescription, "created_by": userId, "public": svPublic }]);
-        if(error) {
+        const { error, data } = await supabase.from("servers").insert([{ "sv_name": svName, "sv_description": svDescription, "created_by": userId, "public": svPublic }]).select().single();
+        if (error) {
             return NextResponse.json({ error: "db hatası" }, { status: 405 });
+        }
+        const svid = data.id;
+        const { error: er2 } = await supabase.from("memberships").insert([{ "user_id": userId, "sv_id": svid }]);
+        if (er2) {
+            return NextResponse.json({ error: "db hatası 2" }, { status: 406 });
         }
         return NextResponse.json({ message: "başarılı" }, { status: 202 });
     } catch (error: any) {

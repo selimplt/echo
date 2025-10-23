@@ -28,7 +28,7 @@ const Navbar = () => {
     const { user, fetchUser, logout, isLoading, error } = useAuthStore();
     const [svName, SetSvName] = useState<string>("");
     const [svDescription, SetSvDescription] = useState<string>("Merhaba, sunucuma hoş geldiniz.");
-    const [svPublic, SetSvPublic] = useState<string>("");
+    const [svPublic, SetSvPublic] = useState<string>("true");
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
