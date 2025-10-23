@@ -18,16 +18,42 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import useAuthStore from '@/store/userstor';
+import { NativeSelect, NativeSelectOption } from './ui/native-select';
+import { toast } from "sonner"
+import axios from 'axios';
 
 const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname()
     const { user, fetchUser, logout, isLoading, error } = useAuthStore();
     const [svName, SetSvName] = useState<string>("");
+    const [svDescription, SetSvDescription] = useState<string>("Merhaba, sunucuma hoş geldiniz.");
+    const [svPublic, SetSvPublic] = useState<string>("");
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         SetSvName(`${user?.seen_name} sunucusu` || "");
     }, [user])
+
+    const createsv = async () => {
+        try {
+            const res = await axios.post<any>("/api/servers/createsv", { svName, svDescription, svPublic });
+            if (res.data.message == "başarılı") {
+                toast("Tebrikler", {
+                    description: "sunucu başarıyla oluşturuldu",
+                })
+                setOpen(false);
+            } else {
+                toast("bir sorun meydana geldi", {
+                    description: "bir hata meydana geldi",
+                })
+            }
+        } catch (error: any) {
+            toast("bir sorun meydana geldi", {
+                description: `hata : ${error}`,
+            })
+        }
+    }
 
     return (
         <div className={`${pathname === '/auth' ? `hidden w-0` : `w-14 h-fit flex flex-col items-center px-2 gap-2`}`}>
@@ -43,8 +69,8 @@ const Navbar = () => {
             <Link href={'/settings'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/settings' ? 'bg-background-5' : ''}`}>
                 <IoSettingsSharp className='text-[#d6d5f0] text-2xl' />
             </Link>
-            <Dialog>
-                <form action="">
+            <Dialog open={open} onOpenChange={setOpen}>
+                <form>
                     <DialogTrigger>
                         <div className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all cursor-pointer`}>
                             <FaPlus className='text-[#d6d5f0] text-2xl' />
@@ -64,14 +90,21 @@ const Navbar = () => {
                             </div>
                             <div className="grid gap-3">
                                 <label htmlFor="sv_description">Sunucu açıklaması</label>
-                                <Input id="sv_description" name="sv_description" defaultValue="Merhaba, sunucuma hoş geldiniz." />
+                                <Input id="sv_description" name="sv_description" value={svDescription} onChange={(e) => SetSvDescription(e.target.value)} />
+                            </div>
+                            <div className="grid gap-3">
+                                <label htmlFor="sv_description">Herkese açık ayarı</label>
+                                <NativeSelect value={svPublic} onChange={(e) => SetSvPublic(e.target.value)}>
+                                    <NativeSelectOption value="true">Açık</NativeSelectOption>
+                                    <NativeSelectOption value="false">Kapalı</NativeSelectOption>
+                                </NativeSelect>
                             </div>
                         </div>
                         <DialogFooter>
                             <DialogClose asChild>
-                                <Button >İptal et</Button>
+                                <Button className='cursor-pointer'>İptal et</Button>
                             </DialogClose>
-                            <Button type="submit">Oluştur</Button>
+                            <Button onClick={createsv} className='cursor-pointer'>Oluştur</Button>
                         </DialogFooter>
                     </DialogContent>
                 </form>

@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
 import Rightnav from "@/components/Rightnav";
+import { Toaster } from "@/components/ui/sonner"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
