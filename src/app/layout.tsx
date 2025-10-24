@@ -50,7 +50,7 @@ export default function RootLayout({
                 <main className="flex-1 bg-background md:rounded-xl">
                   {children}
                 </main>
-                <div className="h-full hidden md:flex md:flex-col md:w-fit bg-card rounded-lg overflow-y-scroll">
+                <div className="h-full hidden lg:flex lg:flex-col lg:w-fit bg-card rounded-lg overflow-y-scroll">
                   <Rightnav />
                 </div>
               </div>

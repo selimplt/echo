@@ -86,7 +86,7 @@ const Navbar = () => {
                         <div className="grid gap-4">
                             <div className="grid gap-3">
                                 <label htmlFor="sv_name">Sunucu adı</label>
-                                <Input id="sv_name" name="sv_name" value={svName} onChange={(e) => SetSvName(e.target.value)} />
+                                <Input id="sv_name" name="sv_name" value={svName} onChange={(e) => SetSvName(e.target.value)} maxLength={20}/>
                             </div>
                             <div className="grid gap-3">
                                 <label htmlFor="sv_description">Sunucu açıklaması</label>
