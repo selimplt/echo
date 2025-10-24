@@ -47,7 +47,7 @@ export default function RootLayout({
                 <Navbar />
               </nav>
               <div className="flex-1 flex md:pb-2 md:pr-2 gap-2">
-                <main className="flex-1 bg-background md:rounded-xl">
+                <main className="flex-1 bg-background md:rounded-xl overflow-y-scroll">
                   {children}
                 </main>
                 <div className="h-full hidden lg:flex lg:flex-col lg:w-fit bg-card rounded-lg overflow-y-scroll">

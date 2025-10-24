@@ -59,7 +59,7 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-2">
           {followers.map((f) => (
             f.status == 'accepted' ? (
-              <Link href={"/"} key={f.id} className="p-2 bg-card rounded-lg flex flex-col hover:shadow-xl hover:scale-105 transition-all">
+              <Link href={`/dm/${f.users.id}`} key={f.id} className="p-2 bg-card rounded-lg flex flex-col hover:shadow-xl hover:scale-105 transition-all">
                 <div className="w-full h-fit flex items-center gap-2">
                   <div className='w-12 h-12 bg-foreground rounded-full flex items-center justify-center'>
                     {

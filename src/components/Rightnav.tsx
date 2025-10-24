@@ -3,6 +3,7 @@ import React from 'react'
 import { usePathname } from 'next/navigation'
 
 import Mainpagenav from './Mainpagenav'
+import Dmside from './dmside'
 
 const Rightnav = () => {
     const path = usePathname();
@@ -14,6 +15,11 @@ const Rightnav = () => {
     if (path === "/servers") {
         return (
             <Mainpagenav />
+        )
+    }
+    if (path.startsWith("/dm/")) {
+        return (
+            <Dmside />
         )
     }
     return (
