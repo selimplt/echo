@@ -43,14 +43,14 @@ export default function RootLayout({
               <Header />
             </header>
             <div className="w-full h-[calc(100vh-56px)] flex">
-              <nav className="h-full hidden md:w-fit md:flex md:flex-col items-center justify-start overflow-y-scroll">
+              <nav className="h-full hidden md:w-fit md:flex md:flex-col items-center justify-start overflow-y-scroll no-scrollbar">
                 <Navbar />
               </nav>
               <div className="flex-1 flex md:pb-2 md:pr-2 gap-2">
-                <main className="flex-1 bg-background md:rounded-xl overflow-y-scroll">
+                <main className="flex-1 bg-background md:rounded-xl shadow-xl">
                   {children}
                 </main>
-                <div className="h-full hidden lg:flex lg:flex-col lg:w-fit bg-card rounded-lg overflow-y-scroll">
+                <div className="h-full hidden lg:flex lg:flex-col lg:w-fit bg-card rounded-lg overflow-y-scroll shadow-xl custom-scrollbar">
                   <Rightnav />
                 </div>
               </div>
