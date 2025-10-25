@@ -77,17 +77,15 @@ const page = () => {
         <div className="w-full h-[calc(100%-48px)] p-2">
             <div className='w-full h-full flex flex-col gap-2 overflow-y-scroll p-2 custom-scrollbar'>
                 {messages.map((msg, i) => (
-                    <div className={`h-fit p-2 max-w-[70%] bg-amber-500 flex gap-2 ${msg.writed_by == id ? "self-start flex-row" : "self-end flex-row-reverse"}`} key={msg.id || i}>
-                        <div className='w-7 h-7 bg-foreground rounded-full flex items-center justify-center'>
-                            {
-                                msg.users.profile_img ? (
-                                    <img src={msg.users.profile_img} alt="profil fotosu" className='rounded-full' />
-                                ) : (
-                                    <FaUser className='text-background' />
-                                )
-                            }
+                    <div className={`h-fit p-2 max-w-[70%] flex items-start gap-2 ${msg.writed_by == id ? "self-start flex-row" : "self-end flex-row-reverse"}`} key={msg.id || i}>
+                        <div className='w-7 h-7 shrink-0 bg-foreground rounded-full flex items-center justify-center'>
+                            {msg.users?.profile_img ? (
+                                <img src={msg.users.profile_img} alt="profil fotosu" className='w-7 h-7 rounded-full object-cover' />
+                            ) : (
+                                <FaUser className='text-background' />
+                            )}
                         </div>
-                        <p>{msg.content}</p>
+                        <div className='max-w-full p-2 wrap-break-word bg-card'>{msg.content}</div>
                     </div>
                 ))}
                 <div ref={scrollRef}></div>
