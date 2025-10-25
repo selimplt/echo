@@ -7,6 +7,15 @@ const Mainpagenav = () => {
     const [loading, SetLoading] = useState<boolean>(true);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [followers, setFollowers] = useState<any[]>([]);
+    const [messages, setMessages] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            const res = await axios.get<any>("/api/messages/last");
+            setMessages(res.data);
+        };
+        fetchMessages();
+    }, []);
 
     useEffect(() => {
         const getfriends = async () => {
@@ -58,40 +67,40 @@ const Mainpagenav = () => {
             <section className='w-full flex flex-col gap-3'>
                 <div className='flex items-center justify-between'>
                     <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>Son Mesajlar</h3>
-                    <span className='text-xs text-gray-400'>2 yeni</span>
+                    <span className='text-xs text-gray-400'>{messages.length} mesaj</span>
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <div className='bg-background rounded-xl p-3 hover:shadow-md transition-all cursor-pointer border border-transparent hover:border-gray-200'>
-                        <div className='flex items-center gap-3 mb-2'>
-                            <div className='relative'>
-                                <div className='w-10 h-10 bg-linear-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center'>
-                                    <FaUser className='text-gray-400 text-sm' />
+                    {
+                        messages.length > 0 ? (
+                            messages.map((mes) => (
+                                <div key={mes.id} className='bg-background rounded-xl p-3 hover:shadow-md transition-all cursor-pointer border border-transparent hover:border-gray-200'>
+                                    <div className='flex items-center gap-3 mb-2'>
+                                        <div className='relative'>
+                                            <div className='w-10 h-10 bg-linear-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center'>
+                                                {mes.sender.profile_img ? (
+                                                    <img src={mes.sender.profile_img} alt="profil" className='w-full h-full object-cover rounded-full' />
+                                                ) : (
+                                                    <FaUser className='text-gray-400 text-3xl' />
+                                                )}
+                                            </div>
+                                            <div className='absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background'></div>
+                                        </div>
+                                        <div className='flex-1 min-w-0'>
+                                            <p className='font-semibold text-sm truncate'>{mes.sender.seen_name}</p>
+                                            <p className='text-xs text-gray-400'>
+                                                {new Date(mes.created_at).getMonth().toString().padStart(2, '0')}/{new Date(mes.created_at).getDay().toString().padStart(2, '0')}
+                                                &nbsp;
+                                                {new Date(mes.created_at).getHours().toString().padStart(2, '0')}:{new Date(mes.created_at).getMinutes().toString().padStart(2, '0')}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p className='text-sm text-gray-600 truncate ml-13'>{mes.content}</p>
                                 </div>
-                                <div className='absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background'></div>
-                            </div>
-                            <div className='flex-1 min-w-0'>
-                                <p className='font-semibold text-sm truncate'>Arkadaş 1</p>
-                                <p className='text-xs text-gray-400'>2 dakika önce</p>
-                            </div>
-                        </div>
-                        <p className='text-sm text-gray-600 truncate ml-13'>asdfdsgd ada sdas dasdasd...</p>
-                    </div>
-
-                    <div className='bg-background rounded-xl p-3 hover:shadow-md transition-all cursor-pointer border border-transparent hover:border-gray-200'>
-                        <div className='flex items-center gap-3 mb-2'>
-                            <div className='relative'>
-                                <div className='w-10 h-10 bg-linear-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center'>
-                                    <FaUser className='text-gray-400 text-sm' />
-                                </div>
-                                <div className='absolute bottom-0 right-0 w-3 h-3 bg-gray-400 rounded-full border-2 border-background'></div>
-                            </div>
-                            <div className='flex-1 min-w-0'>
-                                <p className='font-semibold text-sm truncate'>Arkadaş 2 aaaaaaaa...</p>
-                                <p className='text-xs text-gray-400'>15 dakika önce</p>
-                            </div>
-                        </div>
-                        <p className='text-sm text-gray-600 truncate ml-13'>asdfdsgd ada sdas dasdasd...</p>
-                    </div>
+                            ))
+                        ) : (
+                            <p>mesaj yok</p>
+                        )
+                    }
                 </div>
             </section>
             <section className='w-full flex flex-col gap-3'>
