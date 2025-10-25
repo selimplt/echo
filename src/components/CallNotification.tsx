@@ -16,7 +16,7 @@ const CallNotification = () => {
     if (callStatus !== 'ringing') return null
 
     return (
-        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-linear-to-r from-indigo-600 to-purple-600 text-white shadow-lg">
             <div className="max-w-4xl mx-auto px-4 py-3">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">

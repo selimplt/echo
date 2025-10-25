@@ -4,18 +4,18 @@ import { useCallStore } from '@/store/useCallStore'
 import { FaPhone, FaPhoneSlash, FaMicrophone, FaMicrophoneSlash } from 'react-icons/fa'
 
 const CallTest = () => {
-    const { 
-        callStatus, 
-        caller, 
-        callee, 
-        localStream, 
-        remoteStream, 
-        startCall, 
-        acceptCall, 
-        rejectCall, 
-        endCall 
+    const {
+        callStatus,
+        caller,
+        callee,
+        localStream,
+        remoteStream,
+        startCall,
+        acceptCall,
+        rejectCall,
+        endCall
     } = useCallStore()
-    
+
     const [isMuted, setIsMuted] = useState(false)
     const [targetUserId, setTargetUserId] = useState('')
 
@@ -24,13 +24,13 @@ const CallTest = () => {
             alert('Hedef kullanıcı ID girin')
             return
         }
-        
+
         const targetUser = {
             id: targetUserId,
             user_name: 'Test User',
             seen_name: 'testuser'
         }
-        
+
         try {
             await startCall(targetUser)
         } catch (error) {
@@ -50,16 +50,13 @@ const CallTest = () => {
     return (
         <div className="p-4 bg-card rounded-lg border">
             <h3 className="text-lg font-semibold mb-4">Sesli Arama Test</h3>
-            
+
             <div className="space-y-4">
-                {/* Call Status */}
                 <div className="p-3 bg-background rounded-lg">
                     <p className="text-sm font-medium">Durum: {callStatus}</p>
                     {caller && <p className="text-sm">Arayan: {caller.user_name}</p>}
                     {callee && <p className="text-sm">Aranan: {callee.user_name}</p>}
                 </div>
-
-                {/* Start Call */}
                 {callStatus === 'idle' && (
                     <div className="space-y-2">
                         <input
@@ -78,8 +75,6 @@ const CallTest = () => {
                         </button>
                     </div>
                 )}
-
-                {/* Call Controls */}
                 {callStatus === 'ringing' && (
                     <div className="flex gap-2">
                         <button
@@ -98,18 +93,15 @@ const CallTest = () => {
                         </button>
                     </div>
                 )}
-
-                {/* During Call */}
                 {(callStatus === 'calling' || callStatus === 'connected') && (
                     <div className="space-y-2">
                         <div className="flex gap-2">
                             <button
                                 onClick={toggleMute}
-                                className={`flex-1 p-2 rounded-lg flex items-center justify-center gap-2 ${
-                                    isMuted 
-                                        ? 'bg-red-500 hover:bg-red-600 text-white' 
+                                className={`flex-1 p-2 rounded-lg flex items-center justify-center gap-2 ${isMuted
+                                        ? 'bg-red-500 hover:bg-red-600 text-white'
                                         : 'bg-gray-500 hover:bg-gray-600 text-white'
-                                }`}
+                                    }`}
                             >
                                 {isMuted ? <FaMicrophoneSlash /> : <FaMicrophone />}
                                 {isMuted ? 'Sesi Aç' : 'Sustur'}
@@ -122,8 +114,7 @@ const CallTest = () => {
                                 Kapat
                             </button>
                         </div>
-                        
-                        {/* Stream Info */}
+
                         <div className="text-xs text-gray-500 space-y-1">
                             <p>Local Stream: {localStream ? '✅' : '❌'}</p>
                             <p>Remote Stream: {remoteStream ? '✅' : '❌'}</p>

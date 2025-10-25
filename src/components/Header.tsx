@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { FaMoon, FaSun, FaUser, FaCog, FaSignOutAlt, FaPhone } from "react-icons/fa"
+import { FaMoon, FaSun, FaUser, FaCog, FaSignOutAlt, FaPhone, FaHome, FaServer } from "react-icons/fa"
+import { TbWorld } from "react-icons/tb";
 import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import axios from 'axios'
@@ -40,7 +41,7 @@ const Header = () => {
     return (
         <div className='relative w-full h-full flex items-center justify-between px-4 gap-4'>
             <div className='flex items-center gap-3'>
-                <h1 className='text-2xl font-bold bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent hidden sm:block'>
+                <h1 className='text-2xl font-bold bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent'>
                     ECHO
                 </h1>
             </div>
@@ -155,17 +156,37 @@ const Header = () => {
                                 <FaUser className='text-gray-500 text-sm' />
                                 <span className='text-sm font-medium'>Profilim</span>
                             </button>
-
+                            <div className='md:hidden'>
+                                <button
+                                    className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-left'
+                                    onClick={() => router.push('/')}
+                                >
+                                    <FaHome className='text-gray-500 text-sm' />
+                                    <span className='text-sm font-medium'>Ana sayfa</span>
+                                </button>
+                                <button
+                                    className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-left'
+                                    onClick={() => router.push('/servers')}
+                                >
+                                    <FaServer className='text-gray-500 text-sm' />
+                                    <span className='text-sm font-medium'>Sunucular</span>
+                                </button>
+                                <button
+                                    className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-left'
+                                    onClick={() => router.push('/')}
+                                >
+                                    <TbWorld className='text-gray-500 text-sm' />
+                                    <span className='text-sm font-medium'>Keşfet</span>
+                                </button>
+                            </div>
                             <button
                                 className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-left'
-                                onClick={() => router.push('/settings')}
+                                onClick={() => router.push('/')}
                             >
                                 <FaCog className='text-gray-500 text-sm' />
                                 <span className='text-sm font-medium'>Ayarlar</span>
                             </button>
-
                             <div className='h-px bg-gray-100 dark:bg-gray-800 my-2'></div>
-
                             <button
                                 onClick={handleSignOut}
                                 className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all text-left text-red-600 dark:text-red-400'
