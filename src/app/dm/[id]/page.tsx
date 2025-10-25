@@ -10,6 +10,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { FaUser } from 'react-icons/fa';
 import useAuthStore from '@/store/userstor';
 import { useGetDmStore } from '@/store/dmtostore';
+import usePageStore from '@/store/pagestore';
 
 const page = () => {
     const [message, SetMessage] = useState<string>("");
@@ -21,6 +22,12 @@ const page = () => {
     const emojiPickerRef = useRef<HTMLDivElement>(null);
     const { user } = useAuthStore();
     const { User_dm, fetchUser } = useGetDmStore();
+    const setPageName = usePageStore((state) => state.setPageName);
+
+    useEffect(() => {
+        setPageName("DM");
+      }, [setPageName]);
+    
 
     useEffect(() => {
         const getMessages = async () => {
@@ -59,7 +66,6 @@ const page = () => {
         };
     }, [id]);
 
-    // Emoji picker dışına tıklanınca kapat
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
