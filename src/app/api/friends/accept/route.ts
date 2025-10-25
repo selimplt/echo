@@ -20,9 +20,6 @@ export const POST = async (req: Request) => {
         const decoded = jwt.verify(token, secret) as JwtPayload;
         const userId = decoded.id;
 
-        console.log(`istek id: ${reqid}`);
-        console.log(`bizim id: ${userId}`);
-        console.log(`lavugun id: ${id}`);
 
         const { error: e1 } = await supabase.from("follows").update([{ "status": "accepted" }]).eq("id", reqid);
         if (e1) {

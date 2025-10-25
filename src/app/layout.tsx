@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Header from "@/components/Header";
 import Rightnav from "@/components/Rightnav";
 import { Toaster } from "@/components/ui/sonner"
+import CallListener from "@/components/CallListener";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <CallListener />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -39,7 +41,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="w-screen h-screen overflow-hidden flex flex-col bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500">
-            <header className="w-full h-14 px-2 pt-2">
+            <header className="w-full h-14 px-2 pt-2 relative z-50">
               <div className="w-full h-full bg-background/95 backdrop-blur-sm rounded-t-xl md:rounded-xl shadow-lg">
                 <Header />
               </div>

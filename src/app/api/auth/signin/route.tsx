@@ -30,7 +30,6 @@ export const POST = async (req: Request) => {
         });
         return response;
     } catch (error) {
-        console.log(error)
         return NextResponse.json({ error: "Giriş yapma başarısız" }, { status: 500 });
     }
 }

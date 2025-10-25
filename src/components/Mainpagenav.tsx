@@ -28,7 +28,6 @@ const Mainpagenav = () => {
             }
         }
         catch (error: any) {
-            console.log(error);
         }
     }
 
@@ -40,7 +39,6 @@ const Mainpagenav = () => {
             }
         }
         catch (error: any) {
-            console.log(error);
         }
     }
 

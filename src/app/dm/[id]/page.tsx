@@ -11,6 +11,7 @@ import { FaUser } from 'react-icons/fa';
 import useAuthStore from '@/store/userstor';
 import { useGetDmStore } from '@/store/dmtostore';
 import usePageStore from '@/store/pagestore';
+import CallNotification from '@/components/CallNotification';
 
 const page = () => {
     const [message, SetMessage] = useState<string>("");
@@ -34,7 +35,6 @@ const page = () => {
             try {
                 const res = await axios.get<any>(`/api/messages/getdm?id=${id}`);
                 setMessages(res.data.messages || []);
-                console.log(res.data.messages)
             } catch (err) {
                 SetError(`Mesajları alırken hata:, ${err}`);
             }
@@ -107,7 +107,8 @@ const page = () => {
     }, [messages]);
 
     return (
-        <div className="w-full h-[calc(100%-48px)] p-2">
+        <div className="w-full h-[calc(100%-48px)] p-2 relative">
+            <CallNotification />
             <div className='w-full h-full flex flex-col gap-3 overflow-y-scroll p-2 custom-scrollbar'>
                 {messages.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full text-center">

@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { FaMoon, FaSun, FaUser, FaCog } from "react-icons/fa"
+import { FaMoon, FaSun, FaUser, FaCog, FaSignOutAlt, FaPhone } from "react-icons/fa"
 import { useTheme } from "next-themes"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import usePageStore from '@/store/pagestore'
 import useAuthStore from '@/store/userstor'
+import { useCallStore } from '@/store/useCallStore'
 
 const Header = () => {
     const pathname = usePathname();
@@ -17,6 +18,7 @@ const Header = () => {
     const router = useRouter();
     const { user, fetchUser } = useAuthStore();
     const pagename = usePageStore((state) => state.pagename);
+    const { callStatus, caller, callee, endCall } = useCallStore()
 
     useEffect(() => {
         setMounted(true);
@@ -50,6 +52,54 @@ const Header = () => {
             </div>
 
             <div className='flex items-center gap-2'>
+                {callStatus !== "idle" && (
+                    <div className="flex items-center gap-2 bg-linear-to-r from-indigo-600 to-purple-600 text-white px-3 py-2 rounded-lg shadow-sm">
+                        <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+                            <FaPhone className="text-white text-xs" />
+                        </div>
+                        <div className="text-xs font-medium">
+                            {callStatus === "calling" && (
+                                <span>{callee?.user_name} aranıyor...</span>
+                            )}
+                            {callStatus === "ringing" && (
+                                <span>Gelen arama - {caller?.user_name}</span>
+                            )}
+                            {callStatus === "connected" && (
+                                <span>{callee?.user_name} ile konuşuyorsunuz</span>
+                            )}
+                        </div>
+                        <div className="flex items-center gap-1">
+                            {callStatus === "ringing" && (
+                                <>
+                                    <button
+                                        onClick={() => {
+                                            const { acceptCall } = useCallStore.getState()
+                                            acceptCall()
+                                        }}
+                                        className="bg-green-500 hover:bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1"
+                                    >
+                                        <FaPhone className="text-xs" />
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            const { rejectCall } = useCallStore.getState()
+                                            rejectCall()
+                                        }}
+                                        className="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1"
+                                    >
+                                        <FaPhone className="text-xs rotate-45" />
+                                    </button>
+                                </>
+                            )}
+                            <button
+                                onClick={endCall}
+                                className="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded flex items-center gap-1"
+                            >
+                                <FaPhone className="text-xs rotate-45" />
+                            </button>
+                        </div>
+                    </div>
+                )}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <button className='w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center transition-all outline-none'>
@@ -85,6 +135,44 @@ const Header = () => {
                             </div>
                         </PopoverTrigger>
                         <PopoverContent className='w-56 p-2' align='end'>
+                            <div className='flex items-center gap-3 p-3 mb-2 border-b border-gray-100 dark:border-gray-800'>
+                                <div className='w-12 h-12 bg-linear-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center overflow-hidden'>
+                                    {user.profile_img ? (
+                                        <img src={user.profile_img} alt="profil" className='w-full h-full object-cover' />
+                                    ) : (
+                                        <FaUser className='text-gray-400 text-sm' />
+                                    )}
+                                </div>
+                                <div className='flex-1 min-w-0'>
+                                    <p className='font-semibold text-sm truncate'>{user.user_name}</p>
+                                    <p className='text-xs text-gray-500 truncate'>@{user.seen_name}</p>
+                                </div>
+                            </div>
+                            <button
+                                className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-left'
+                                onClick={() => router.push('/profile')}
+                            >
+                                <FaUser className='text-gray-500 text-sm' />
+                                <span className='text-sm font-medium'>Profilim</span>
+                            </button>
+
+                            <button
+                                className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-left'
+                                onClick={() => router.push('/settings')}
+                            >
+                                <FaCog className='text-gray-500 text-sm' />
+                                <span className='text-sm font-medium'>Ayarlar</span>
+                            </button>
+
+                            <div className='h-px bg-gray-100 dark:bg-gray-800 my-2'></div>
+
+                            <button
+                                onClick={handleSignOut}
+                                className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all text-left text-red-600 dark:text-red-400'
+                            >
+                                <FaSignOutAlt className='text-sm' />
+                                <span className='text-sm font-medium'>Çıkış Yap</span>
+                            </button>
                         </PopoverContent>
                     </Popover>
                 ) : (

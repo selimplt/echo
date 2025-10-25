@@ -39,7 +39,6 @@ const page = () => {
       try {
         const res = await axios.get<any>("/api/servers/getyoursv");
         setServers(res.data.memberships || []);
-        console.log(res.data.memberships)
       } catch (error: any) {
         setErrorMessage("Sunucular yüklenirken hata oluştu.");
       } finally {

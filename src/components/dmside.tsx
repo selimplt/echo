@@ -1,10 +1,14 @@
 'use client'
 import React, { useEffect } from 'react'
-import { FaUser, FaClock, FaInfoCircle, FaBan, FaUserMinus } from 'react-icons/fa'
+import { FaUser, FaClock, FaInfoCircle, FaBan, FaUserMinus, FaPhone } from 'react-icons/fa'
 import { useGetDmStore } from '@/store/dmtostore'
+import { useCallStore } from '@/store/useCallStore'
+import useAuthStore from '@/store/userstor'
 
 const Dmside = () => {
   const { User_dm } = useGetDmStore();
+  const { startCall } = useCallStore();
+  const { user } = useAuthStore();
 
   const formatLastSeen = (lastSeen: any) => {
     if (!lastSeen) return 'Bilinmiyor';
@@ -99,6 +103,25 @@ const Dmside = () => {
       <section className='w-full flex flex-col gap-2'>
         <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>İşlemler</h3>
         <div className='flex flex-col gap-2'>
+          <button
+            className='w-full bg-background hover:bg-gray-50 rounded-xl p-3 flex items-center gap-3 transition-all border border-transparent hover:border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed'
+            onClick={async () => {
+              try {
+                await startCall(User_dm)
+              } catch (error) {
+                console.error('Arama başlatma hatası:', error)
+              }
+            }}
+            disabled={!User_dm}
+          >
+            <div className='w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center'>
+              <FaPhone className='text-green-600 text-sm' />
+            </div>
+            <div className='flex-1 text-left'>
+              <p className='font-semibold text-sm'>Sesli Arama Başlat</p>
+              <p className='text-xs text-gray-400'>Mikrofon izni gerekir</p>
+            </div>
+          </button>
           <button className='w-full bg-background hover:bg-gray-50 rounded-xl p-3 flex items-center gap-3 transition-all border border-transparent hover:border-gray-200'>
             <div className='w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center'>
               <FaBan className='text-red-600 text-sm' />
