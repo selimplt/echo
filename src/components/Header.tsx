@@ -66,14 +66,12 @@ const Header = () => {
                         <Popover>
                             <PopoverTrigger className='hover:bg-background-5 transition-all cursor-pointer px-4 rounded-lg h-10 gap-2 text-[#d6d5f0] font-semibold flex items-center'>
                                 {user.seen_name}
-                                <div className='w-7 h-7 bg-[#d6d5f0] rounded-full flex items-center justify-center'>
-                                    {
-                                        user.profile_img ? (
-                                            <img src={user.profile_img} alt="profil fotosu" className='rounded-full' />
-                                        ) : (
-                                            <FaUser className='text-[#262330]' />
-                                        )
-                                    }
+                                <div className='w-10 h-10 bg-linear-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center overflow-hidden shrink-0'>
+                                    {user.profile_img ? (
+                                        <img src={user.profile_img} alt="profil fotosu" className='w-full h-full object-cover' />
+                                    ) : (
+                                        <FaUser className='text-gray-400 text-sm' />
+                                    )}
                                 </div>
                             </PopoverTrigger>
                             <PopoverContent className='flex flex-col'>
