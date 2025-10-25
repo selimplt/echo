@@ -59,7 +59,7 @@ const Mainpagenav = () => {
             </div>
             <section className='w-full flex flex-col gap-3'>
                 <div className='flex items-center justify-between'>
-                    <h3 className='font-semibold text-sm text-gray-700'>Son Mesajlar</h3>
+                    <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>Son Mesajlar</h3>
                     <span className='text-xs text-gray-400'>2 yeni</span>
                 </div>
                 <div className='flex flex-col gap-2'>
@@ -98,7 +98,7 @@ const Mainpagenav = () => {
             </section>
             <section className='w-full flex flex-col gap-3'>
                 <div className='flex items-center justify-between'>
-                    <h3 className='font-semibold text-sm text-gray-700'>Arkadaşlık İstekleri</h3>
+                    <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>Arkadaşlık İstekleri</h3>
                     {pendingRequests.length > 0 && (
                         <span className='px-2 py-0.5 bg-red-500 text-white text-xs font-semibold rounded-full'>
                             {pendingRequests.length}

@@ -65,10 +65,10 @@ const Dmside = () => {
         <section className='w-full flex flex-col gap-2'>
           <div className='flex items-center gap-2'>
             <FaInfoCircle className='text-gray-400 text-sm' />
-            <h3 className='font-semibold text-sm text-gray-700'>Hakkında</h3>
+            <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>Hakkında</h3>
           </div>
           <div className='bg-background rounded-xl p-3'>
-            <p className='text-sm text-gray-600 leading-relaxed wrap-break-word'>
+            <p className='text-sm text-gray-600 dark:text-gray-400 leading-relaxed wrap-break-word'>
               {User_dm.bio}
             </p>
           </div>
@@ -77,10 +77,10 @@ const Dmside = () => {
       <section className='w-full flex flex-col gap-2'>
         <div className='flex items-center gap-2'>
           <FaClock className='text-gray-400 text-sm' />
-          <h3 className='font-semibold text-sm text-gray-700'>Son Görülme</h3>
+          <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>Son Görülme</h3>
         </div>
         <div className='bg-background rounded-xl p-3'>
-          <p className='text-sm text-gray-600'>
+          <p className='text-sm text-gray-600 dark:text-gray-400'>
             {formatLastSeen(User_dm.last_seen)}
           </p>
         </div>
@@ -88,16 +88,16 @@ const Dmside = () => {
       <section className='w-full flex flex-col gap-2'>
         <div className='flex items-center gap-2'>
           <FaUser className='text-gray-400 text-sm' />
-          <h3 className='font-semibold text-sm text-gray-700'>Üyelik</h3>
+          <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>Üyelik</h3>
         </div>
         <div className='bg-background rounded-xl p-3'>
-          <p className='text-sm text-gray-600'>
+          <p className='text-sm text-gray-600 dark:text-gray-400'>
             {formatJoinDate(User_dm.created_at)} tarihinden beri üye
           </p>
         </div>
       </section>
       <section className='w-full flex flex-col gap-2'>
-        <h3 className='font-semibold text-sm text-gray-700'>İşlemler</h3>
+        <h3 className='font-semibold text-sm text-gray-700 dark:text-gray-300'>İşlemler</h3>
         <div className='flex flex-col gap-2'>
           <button className='w-full bg-background hover:bg-gray-50 rounded-xl p-3 flex items-center gap-3 transition-all border border-transparent hover:border-gray-200'>
             <div className='w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center'>

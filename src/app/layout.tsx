@@ -38,21 +38,27 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="w-screen h-screen overflow-hidden flex flex-col bg-linear-to-tr from-fuchsia-800 to-indigo-800">
-            <header className="w-screen h-14">
-              <Header />
+          <div className="w-screen h-screen overflow-hidden flex flex-col bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500">
+            <header className="w-full h-14 px-2 pt-2">
+              <div className="w-full h-full bg-background/95 backdrop-blur-sm rounded-t-xl md:rounded-xl shadow-lg">
+                <Header />
+              </div>
             </header>
-            <div className="w-full h-[calc(100vh-56px)] flex">
-              <nav className="h-full hidden md:w-fit md:flex md:flex-col items-center justify-start overflow-y-scroll no-scrollbar">
-                <Navbar />
+            <div className="w-full flex-1 flex gap-2 mt-2 p-2 pt-0 overflow-hidden">
+              <nav className="h-full hidden md:flex md:flex-col w-fit">
+                <div className="h-full bg-background/95 backdrop-blur-sm rounded-xl shadow-lg overflow-y-auto no-scrollbar">
+                  <Navbar />
+                </div>
               </nav>
-              <div className="flex-1 flex md:pb-2 md:pr-2 gap-2">
-                <main className="flex-1 bg-background md:rounded-xl shadow-xl">
+              <div className="flex-1 flex gap-2 min-w-0 overflow-hidden">
+                <main className="flex-1 bg-background/95 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden">
                   {children}
                 </main>
-                <div className="h-full hidden lg:flex lg:flex-col lg:w-fit bg-card rounded-lg overflow-y-scroll shadow-xl custom-scrollbar">
-                  <Rightnav />
-                </div>
+                <aside className="h-full hidden lg:flex lg:flex-col w-fit">
+                  <div className="h-full bg-background/95 backdrop-blur-sm rounded-xl shadow-lg overflow-y-auto custom-scrollbar">
+                    <Rightnav />
+                  </div>
+                </aside>
               </div>
             </div>
           </div>

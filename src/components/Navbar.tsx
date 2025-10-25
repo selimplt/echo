@@ -56,24 +56,24 @@ const Navbar = () => {
     }
 
     return (
-        <div className={`${pathname === '/auth' ? `hidden w-0` : `w-14 h-fit flex flex-col items-center px-2 gap-2`}`}>
+        <div className={`${pathname === '/auth' ? `hidden w-0` : `w-14 h-fit flex flex-col items-center px-2 pt-2 gap-2`}`}>
             <Link href={'/'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/' ? 'bg-background-5' : ''}`}>
-                <FaHome className='text-[#d6d5f0] text-2xl' />
+                <FaHome className='text-gray-700 dark:text-gray-300 text-2xl' />
             </Link>
             <Link href={'/servers'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/servers' ? 'bg-background-5' : ''}`}>
-                <FaServer className='text-[#d6d5f0] text-2xl' />
+                <FaServer className='text-gray-700 dark:text-gray-300 text-2xl' />
             </Link>
             <Link href={'/search'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/search' ? 'bg-background-5' : ''}`}>
-                <TbWorld className='text-[#d6d5f0] text-2xl' />
+                <TbWorld className='text-gray-700 dark:text-gray-300 text-2xl' />
             </Link>
             <Link href={'/settings'} className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all ${pathname === '/settings' ? 'bg-background-5' : ''}`}>
-                <IoSettingsSharp className='text-[#d6d5f0] text-2xl' />
+                <IoSettingsSharp className='text-gray-700 dark:text-gray-300 text-2xl' />
             </Link>
             <Dialog open={open} onOpenChange={setOpen}>
                 <form>
                     <DialogTrigger>
                         <div className={`hover:bg-background-5 w-10 h-10 rounded-lg flex items-center justify-center transition-all cursor-pointer`}>
-                            <FaPlus className='text-[#d6d5f0] text-2xl' />
+                            <FaPlus className='text-gray-700 dark:text-gray-300 text-2xl' />
                         </div>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">

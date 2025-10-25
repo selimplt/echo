@@ -152,7 +152,7 @@ const page = () => {
                                         </p>
                                     )}
 
-                                    <div className={`px-4 py-2.5 max-w-[70%] rounded-2xl wrap-break-word relative ${isReceived
+                                    <div className={`px-4 py-2.5 max-w-[70%] rounded-2xl wrap-break-word relative dark:border-none ${isReceived
                                         ? 'bg-card border border-gray-100'
                                         : 'bg-foreground text-background'
                                         } ${!showAvatar ? 'mt-1' : ''}`}>
@@ -190,7 +190,7 @@ const page = () => {
             </div>
 
             <form onSubmit={(e) => { e.preventDefault(); sendMessage(); }} className='w-full h-fit rounded-lg sticky bottom-0 flex items-center gap-2'>
-                <InputGroup className='min-h-12 bg-card border border-gray-200 rounded-xl'>
+                <InputGroup className='min-h-12 bg-card border border-gray-200 rounded-xl dark:border-none'>
                     <InputGroupInput
                         placeholder='Mesajını yaz...'
                         value={message}
@@ -214,7 +214,7 @@ const page = () => {
                         </InputGroupButton>
                         <InputGroupButton
                             type="submit"
-                            className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all ${message.trim()
+                            className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all mr-2 ${message.trim()
                                 ? 'bg-foreground hover:opacity-90 text-background'
                                 : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                 }`}
