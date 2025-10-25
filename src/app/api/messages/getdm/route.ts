@@ -23,7 +23,7 @@ export const GET = async (req: Request) => {
 
         const { data, error } = await supabase
             .from("direct_messages")
-            .select("*")
+            .select("*,users:writed_by(*)")
             .or(`and(writed_by.eq.${userId},writed_to.eq.${targetId}),and(writed_by.eq.${targetId},writed_to.eq.${userId})`)
             .order("created_at", { ascending: true });
 

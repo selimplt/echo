@@ -6,6 +6,7 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import { FaUser } from 'react-icons/fa';
 
 const page = () => {
     const [message, SetMessage] = useState<string>("");
@@ -76,11 +77,17 @@ const page = () => {
         <div className="w-full h-[calc(100%-48px)] p-2">
             <div className='w-full h-full flex flex-col gap-2 overflow-y-scroll p-2 custom-scrollbar'>
                 {messages.map((msg, i) => (
-                    <div
-                        key={msg.id || i}
-                        className={`p-2 rounded-lg w-fit max-w-[70%] ${msg.writed_by === id ? "bg-muted self-start" : "bg-secondary self-end"}`}
-                    >
-                        {msg.content}
+                    <div className={`h-fit p-2 max-w-[70%] bg-amber-500 flex gap-2 ${msg.writed_by == id ? "self-start flex-row" : "self-end flex-row-reverse"}`} key={msg.id || i}>
+                        <div className='w-7 h-7 bg-foreground rounded-full flex items-center justify-center'>
+                            {
+                                msg.users.profile_img ? (
+                                    <img src={msg.users.profile_img} alt="profil fotosu" className='rounded-full' />
+                                ) : (
+                                    <FaUser className='text-background' />
+                                )
+                            }
+                        </div>
+                        <p>{msg.content}</p>
                     </div>
                 ))}
                 <div ref={scrollRef}></div>
