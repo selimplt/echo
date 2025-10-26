@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaUser, FaCheck, FaTimes, FaUserFriends } from 'react-icons/fa'
 import axios from 'axios'
+import Link from 'next/link'
 
 const Mainpagenav = () => {
     const [loading, SetLoading] = useState<boolean>(true);
@@ -73,7 +74,7 @@ const Mainpagenav = () => {
                     {
                         messages.length > 0 ? (
                             messages.map((mes) => (
-                                <div key={mes.id} className='bg-background rounded-xl p-3 hover:shadow-md transition-all cursor-pointer border border-transparent hover:border-gray-200'>
+                                <Link href={`/dm/${mes.sender.id}`} key={mes.id} className='bg-background rounded-xl p-3 hover:shadow-md transition-all cursor-pointer border border-transparent hover:border-gray-200'>
                                     <div className='flex items-center gap-3 mb-2'>
                                         <div className='relative'>
                                             <div className='w-10 h-10 bg-linear-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center'>
@@ -95,7 +96,7 @@ const Mainpagenav = () => {
                                         </div>
                                     </div>
                                     <p className='text-sm text-gray-600 dark:text-gray-400 truncate ml-13'>{mes.content}</p>
-                                </div>
+                                </Link>
                             ))
                         ) : (
                             <p>mesaj yok</p>

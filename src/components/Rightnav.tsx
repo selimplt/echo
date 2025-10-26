@@ -7,12 +7,7 @@ import Dmside from './dmside'
 
 const Rightnav = () => {
     const path = usePathname();
-    if (path === "/") {
-        return (
-            <Mainpagenav />
-        )
-    }
-    if (path === "/servers") {
+    if (path === "/" || path === "/servers" || path === "/search") {
         return (
             <Mainpagenav />
         )

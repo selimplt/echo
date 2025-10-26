@@ -145,8 +145,8 @@ const Header = () => {
                                     )}
                                 </div>
                                 <div className='flex-1 min-w-0'>
-                                    <p className='font-semibold text-sm truncate'>{user.user_name}</p>
-                                    <p className='text-xs text-gray-500 truncate'>@{user.seen_name}</p>
+                                    <p className='font-semibold text-sm truncate'>{user.seen_name}</p>
+                                    <p className='text-xs text-gray-500 truncate'>@{user.user_name}</p>
                                 </div>
                             </div>
                             <button

@@ -42,9 +42,10 @@ const SearchPage = () => {
     }, [searchQuery]);
 
 
-    const sendFriendRequest = async (userId: string) => {
+    const sendFriendRequest = async (id: string) => {
         try {
-            await axios.post('/api/friends/send', { userId })
+            await axios.post('/api/friends/friendrequest', { id })
+            window.location.reload();
         } catch (err) {
             console.error('Arkadaşlık isteği gönderilemedi')
         }
@@ -146,8 +147,8 @@ const SearchPage = () => {
                                                 )}
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <p className="font-semibold text-base truncate">{user.user_name}</p>
-                                                <p className="text-sm text-gray-500 truncate">@{user.seen_name}</p>
+                                                <p className="font-semibold text-base truncate">{user.seen_name}</p>
+                                                <p className="text-sm text-gray-500 truncate">@{user.user_name}</p>
                                             </div>
                                         </div>
                                         {user.bio && (
