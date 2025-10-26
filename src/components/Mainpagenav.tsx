@@ -94,7 +94,7 @@ const Mainpagenav = () => {
                                             </p>
                                         </div>
                                     </div>
-                                    <p className='text-sm text-gray-600 truncate ml-13'>{mes.content}</p>
+                                    <p className='text-sm text-gray-600 dark:text-gray-400 truncate ml-13'>{mes.content}</p>
                                 </div>
                             ))
                         ) : (
