@@ -106,7 +106,7 @@ export default function Home() {
                   
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-base truncate mb-1 group-hover:text-foreground transition-colors">
-                      {f.users.user_name}
+                      {f.users.seen_name}
                     </p>
                     {f.users.bio && (
                       <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">

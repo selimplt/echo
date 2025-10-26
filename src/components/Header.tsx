@@ -60,13 +60,13 @@ const Header = () => {
                         </div>
                         <div className="text-xs font-medium">
                             {callStatus === "calling" && (
-                                <span>{callee?.user_name} aranıyor...</span>
+                                <span>{callee?.seen_name} aranıyor...</span>
                             )}
                             {callStatus === "ringing" && (
-                                <span>Gelen arama - {caller?.user_name}</span>
+                                <span>Gelen arama - {caller?.seen_name}</span>
                             )}
                             {callStatus === "connected" && (
-                                <span>{callee?.user_name} ile konuşuyorsunuz</span>
+                                <span>{callee?.seen_name} ile konuşuyorsunuz</span>
                             )}
                         </div>
                         <div className="flex items-center gap-1">

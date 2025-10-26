@@ -1,4 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabaseClient';
 import { cookies } from "next/headers";
@@ -50,7 +49,6 @@ export async function GET() {
 
         return NextResponse.json(enriched);
     } catch (err: any) {
-        console.error(err);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }

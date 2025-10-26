@@ -19,11 +19,21 @@ const SearchPage = () => {
 
     useEffect(() => {
         if (searchQuery) {
-            const timer = setTimeout(() => {
-                if (activeTab === "servers"){
-                    console.log("sunucu:", searchQuery)
+            const timer = setTimeout(async () => {
+                if (activeTab === "users") {
+                    try {
+                        const res = await axios.post<any>("/api/find", { activeTab, searchQuery });
+                        setUsers(res.data.data)
+                    } catch {
+                        alert("hata");
+                    }
                 } else {
-                    console.log("kullanıcı:", searchQuery)
+                    try {
+                        const res = await axios.post<any>("/api/find", { activeTab, searchQuery });
+                        setServers(res.data.data)
+                    } catch {
+                        alert("hata");
+                    }
                 }
             }, 350);
 
@@ -78,8 +88,8 @@ const SearchPage = () => {
                     <button
                         onClick={() => setActiveTab('users')}
                         className={`flex items-center gap-2 px-4 py-3 font-semibold transition-all relative ${activeTab === 'users'
-                                ? 'text-foreground'
-                                : 'text-gray-500 hover:text-gray-700'
+                            ? 'text-foreground'
+                            : 'text-gray-500 hover:text-gray-700'
                             }`}
                     >
                         <FaUser className="text-sm" />
@@ -91,8 +101,8 @@ const SearchPage = () => {
                     <button
                         onClick={() => setActiveTab('servers')}
                         className={`flex items-center gap-2 px-4 py-3 font-semibold transition-all relative ${activeTab === 'servers'
-                                ? 'text-foreground'
-                                : 'text-gray-500 hover:text-gray-700'
+                            ? 'text-foreground'
+                            : 'text-gray-500 hover:text-gray-700'
                             }`}
                     >
                         <FaServer className="text-sm" />
@@ -169,7 +179,7 @@ const SearchPage = () => {
                                     >
                                         <div className="relative w-full h-40 overflow-hidden">
                                             <img
-                                                src={server.sv_img || 'https://via.placeholder.com/400x200'}
+                                                src={server.sv_img || 'https://img.freepik.com/free-vector/game-level-landscape-with-ground-platform_107791-30139.jpg?semt=ais_hybrid&w=740&q=80'}
                                                 alt={server.sv_name}
                                                 className="w-full h-full object-cover"
                                             />
