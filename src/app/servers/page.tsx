@@ -89,9 +89,9 @@ const page = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {servers.map((s) => (
               <Link
-                href={`/server/${s.servers.id}`}
+                href={`/servers/${s.servers.id}`}
                 key={s.id}
-                className="group relative bg-card rounded-xl overflow-hidden border border-transparent hover:border-gray-200 hover:shadow-xl transition-all duration-300"
+                className="group relative bg-card rounded-xl overflow-hidden border border-transparent hover:border-gray-200 dark:border-0 hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative w-full h-48 overflow-hidden">
                   <img

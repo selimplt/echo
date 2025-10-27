@@ -86,7 +86,7 @@ export default function Home() {
               <Link 
                 href={`/dm/${f.users.id}`} 
                 key={f.id} 
-                className="group p-4 bg-card rounded-xl border border-transparent hover:border-gray-200 hover:shadow-lg transition-all duration-200"
+                className="group p-4 bg-card rounded-xl border border-transparent hover:border-gray-200 dark:border-0 hover:shadow-lg transition-all duration-200"
               >
                 <div className="flex items-start gap-3">
                   <div className="relative shrink-0">
