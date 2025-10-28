@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 
 import Mainpagenav from './Mainpagenav'
 import Dmside from './dmside'
+import Svside from './svside'
 
 const Rightnav = () => {
     const path = usePathname();
@@ -15,6 +16,11 @@ const Rightnav = () => {
     if (path.startsWith("/dm/")) {
         return (
             <Dmside />
+        )
+    }
+    if (path.startsWith("/servers/")) {
+        return (
+            <Svside />
         )
     }
     return (

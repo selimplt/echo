@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { FaHashtag, FaCog, FaUser } from 'react-icons/fa'
 import axios from 'axios'
 
@@ -8,13 +8,13 @@ const page = () => {
     const { serverId } = useParams()
     const [activeChannel, setActiveChannel] = useState<string | null>(null)
     const [members, SetMembers] = useState<any[]>([]);
+    const router = useRouter();
 
     useEffect(() => {
         if (!serverId) return;
         const getdata = async () => {
             try {
                 const res = await axios.post<any>("/api/servers/svmembers", { serverId });
-                console.log(res.data)
                 SetMembers(res.data.followers)
             } catch (err) {
                 console.log(`hata: ${err}`)
@@ -68,7 +68,7 @@ const page = () => {
                             Kanal seçin
                         </h3>
                     </div>
-                    <button className="w-9 h-9 hover:bg-gray-100 dark:hover:bg-card rounded-lg flex items-center justify-center transition-all">
+                    <button onClick={() => router.push(`/servers/${serverId}/settings`)} className="w-9 h-9 hover:bg-gray-100 dark:hover:bg-card rounded-lg flex items-center justify-center transition-all">
                         <FaCog className="text-gray-600" />
                     </button>
                 </div>
