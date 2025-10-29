@@ -13,9 +13,8 @@ const svside = () => {
         const getrooms = async () => {
             try {
                 const res = await axios.post<any>("/api/servers/svrooms", { serverId });
-                console.log(res.data)
+                SetRooms(res.data);
             } catch (error: any) {
-                console.log(`hata: ${error}`)
                 setErrorMessage("Sunucular yüklenirken hata oluştu.");
             }
         }
