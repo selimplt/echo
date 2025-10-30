@@ -30,16 +30,6 @@ const ServerSettingsPage = () => {
   const [newRoom, SetNewRoom] = useState<string>("");
   const [rooms, SetRooms] = useState<any[]>([]);
 
-  useEffect(() => {
-    if (!serverName) return;
-    console.log(serverName)
-  }, [serverName])
-
-  useEffect(() => {
-    if (!serverDescription) return;
-    console.log(serverDescription)
-  }, [serverDescription])
-
   const addroom = async () => {
     try {
       const res = await axios.post<any>("/api/servers/addroom", { serverId, newRoom });
@@ -51,13 +41,35 @@ const ServerSettingsPage = () => {
     }
   }
 
+  const delroom = async (id: string) => {
+    try {
+      const res = axios.post<any>("/api/servers/delroom", { id });
+      toast("oda başarıyla silindi", {
+        description: `${id}: numaralı oda silindi`,
+      })
+    } catch (error: any) {
+      toast("bir sorun meydana geldi", {
+        description: `hata : ${error}`,
+      })
+    }
+  }
+
+  const updatesv = async () => {
+    try {
+      const res = axios.post<any>("/api/servers/updatesv", { serverName, serverDescription, serverId });
+      toast("güncelleme başarılı")
+    } catch (error: any) {
+      toast("bir sorun meydana geldi", {
+        description: `hata : ${error}`,
+      })
+    }
+  }
 
   useEffect(() => {
     if (!serverId) return;
     const getrooms = async () => {
       try {
         const res = await axios.post<any>("/api/servers/svrooms", { serverId });
-        console.log(res.data.rooms)
         SetRooms(res.data.rooms);
       } catch (error: any) {
         setErrorMessage("Sunucular yüklenirken hata oluştu.");
@@ -129,6 +141,7 @@ const ServerSettingsPage = () => {
           </div>
           <Button
             className="w-full md:w-auto px-6 py-3 bg-foreground text-background rounded-lg font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2"
+            onClick={updatesv}
           >
             <FaSave />
             Değişiklikleri Kaydet
@@ -187,6 +200,7 @@ const ServerSettingsPage = () => {
                   </div>
                   <button
                     className="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg font-medium text-sm flex items-center gap-2 transition-all opacity-0 group-hover:opacity-100"
+                    onClick={() => delroom(channel.id)}
                   >
                     <FaTrash className="text-xs" />
                     Sil
