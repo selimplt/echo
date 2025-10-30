@@ -27,8 +27,7 @@ const useAuthStore = create<AuthStore>((set) => ({
         set({ isLoading: true, error: null });
 
         try {
-            const response = await axios.get('/api/auth/control', {});
-
+            const response = await axios.get('/api/auth/control', { withCredentials: true });
             const data: any = response.data;
 
             if (response.status === 200 && data.valid) {
