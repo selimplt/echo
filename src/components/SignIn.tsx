@@ -23,7 +23,7 @@ const SignIn = () => {
 
     const onSubmit = async (data: z.infer<typeof schema>) => {
         try {
-            const res = await axios.post('/api/auth/signin', data);
+            const res = await axios.post('/api/auth/signin', data, { withCredentials: true });
             const { message, error }: any = res.data;
             if (message) {
                 setSuccessMessage(message || "giriş başarılı");
