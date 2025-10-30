@@ -17,7 +17,7 @@ export const POST = async (req: Request) => {
         if (error) {
             return NextResponse.json({ error: "hata" }, { status: 500 });
         }
-        const comp = bcrypt.compare(data.password, password);
+        const comp = await bcrypt.compare(password, data.password);
         if (!comp) {
             return NextResponse.json({ error: "Şifre yanlış" }, { status: 401 });
         }
