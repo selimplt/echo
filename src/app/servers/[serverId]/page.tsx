@@ -25,13 +25,10 @@ const page = () => {
 
     return (
         <div className="w-full h-full flex">
-            <div className="w-60 h-full bg-card/50 flex xl:flex-col">
-                <div className="p-4">
-                    <h3 className="font-semibold text-sm text-gray-700">Üyeler — {members.length}</h3>
-                </div>
+            <div className="w-60 h-full bg-card/50 flex flex-col">
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-2">
                     <div>
-                        <div className="px-2 py-1 text-xs font-semibold text-gray-500 uppercase">
+                        <div className="px-2 py-1 text-xs font-semibold text-gray-500 uppercase mt-4">
                             Üyeler — {members.length}
                         </div>
                         {

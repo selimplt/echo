@@ -28,7 +28,7 @@ const svside = () => {
             {
                 rooms.length > 0 ? (
                     rooms.map((r) => (
-                        <Link href={`/`} key={r.id} className='w-full h-fit p-2 rounded-lg hover:bg-card transition-all flex items-center gap-1'>
+                        <Link href={`/servers/${serverId}/room/${r.id}`} key={r.id} className='w-full h-fit p-2 rounded-lg hover:bg-card transition-all flex items-center gap-1'>
                             <p className='font-semibold text-xl text-neutral-600'>#</p>
                             <p className='font-semibold'>{r.name}</p>
                         </Link>
