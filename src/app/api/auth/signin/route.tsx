@@ -25,6 +25,8 @@ export const POST = async (req: Request) => {
         const response = NextResponse.json({ message: "Giriş başarılı" }, { status: 200 });
         response.cookies.set("token", token, {
             httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "none",
             maxAge: 60 * 60 * 24 * 7,
             path: "/",
         });
