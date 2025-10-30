@@ -38,11 +38,11 @@ export const POST = async (req: Request) => {
 
         res.cookies.set("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", 
+            secure: true,
             sameSite: "lax",
             path: "/",
-            maxAge: 60 * 60 * 24 * 7, 
-        });
+            maxAge: 60 * 60 * 24 * 7,
+        })
 
         return res;
     } catch (err) {
