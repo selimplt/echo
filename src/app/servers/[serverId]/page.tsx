@@ -6,9 +6,25 @@ import axios from 'axios'
 
 const page = () => {
     const { serverId } = useParams()
-    const [activeChannel, setActiveChannel] = useState<string | null>(null)
     const [members, SetMembers] = useState<any[]>([]);
     const router = useRouter();
+    const [acces, SetAcces] = useState<boolean>(false);
+
+    useEffect(() => {
+        const getacces = async () => {
+            try {
+                const res = await axios.get<any>("/api/servers/control");
+                if (res.data.access) {
+                    SetAcces(true);
+                } else {
+                    SetAcces(false);
+                }
+            } catch (err) {
+                console.log(`hata: ${err}`)
+            }
+        }
+        getacces();
+    }, [])
 
     useEffect(() => {
         if (!serverId) return;
@@ -65,9 +81,13 @@ const page = () => {
                             Kanal seçin
                         </h3>
                     </div>
-                    <button onClick={() => router.push(`/servers/${serverId}/settings`)} className="w-9 h-9 hover:bg-gray-100 dark:hover:bg-card rounded-lg flex items-center justify-center transition-all">
-                        <FaCog className="text-gray-600" />
-                    </button>
+                    {
+                        acces == true ? (
+                            <button onClick={() => router.push(`/servers/${serverId}/settings`)} className="w-9 h-9 hover:bg-gray-100 dark:hover:bg-card rounded-lg flex items-center justify-center transition-all">
+                                <FaCog className="text-gray-600" />
+                            </button>
+                        ) : null
+                    }
                 </div>
                 <div className="flex-1 flex items-center justify-center">
                     <div className="text-center">

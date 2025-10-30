@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import usePageStore from '@/store/pagestore'
 import { FaUser, FaServer, FaSearch, FaUserPlus, FaCheck } from 'react-icons/fa'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 const SearchPage = () => {
     const setPageName = usePageStore((state) => state.setPageName)
@@ -12,6 +13,7 @@ const SearchPage = () => {
     const [servers, setServers] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const router = useRouter();
 
     useEffect(() => {
         setPageName('Keşfet')
@@ -54,6 +56,7 @@ const SearchPage = () => {
     const joinServer = async (serverId: string) => {
         try {
             await axios.post('/api/servers/join', { serverId })
+            router.push("/");
         } catch (err) {
             console.error('Sunucuya katılınamadı')
         }
