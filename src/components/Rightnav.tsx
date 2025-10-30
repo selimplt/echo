@@ -8,7 +8,7 @@ import Svside from './svside'
 
 const Rightnav = () => {
     const path = usePathname();
-    if (path === "/" || path === "/servers" || path === "/search") {
+    if (path === "/" || path === "/servers" || path === "/search" || path === "/settings") {
         return (
             <Mainpagenav />
         )
