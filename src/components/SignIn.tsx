@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import z from 'zod'
 import { useForm } from 'react-hook-form'
@@ -21,15 +21,25 @@ const SignIn = () => {
         resolver: zodResolver(schema),
     })
 
+    const push = async () => {
+        try {
+            const res = await axios.get<any>('/api/auth/control');
+            if (res.data.valid == true){
+                router.push("/");
+            }
+        } catch {
+            setErrorMessage("hata")
+        }
+    }
+
     const onSubmit = async (data: z.infer<typeof schema>) => {
         try {
-            const res = await axios.post('/api/auth/signin', data, { withCredentials: true });
+            const res = await axios.post('/api/auth/signin', data);
             const { message, error }: any = res.data;
             if (message) {
                 setSuccessMessage(message || "giriş başarılı");
                 setErrorMessage(null);
-                router.push("/");
-                window.location.reload();
+                push();
             }
             if (error) {
                 setErrorMessage(error || "giriş başarılı");

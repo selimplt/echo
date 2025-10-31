@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 import { supabase } from "@/lib/supabaseClient";
+import bcrypt from "bcryptjs";
 
 export const POST = async (req: Request) => {
     try {
         const { user_name, password } = await req.json();
         if (!user_name || !password)
-            return NextResponse.json({ error: "Eksik bilgi" }, { status: 400 });
+            return NextResponse.json({ error: "Kullanıcı adı veya şifre eksik" }, { status: 400 });
 
         const { data, error } = await supabase
             .from("users")
@@ -36,13 +36,15 @@ export const POST = async (req: Request) => {
 
         const res = NextResponse.json({ message: "Giriş başarılı" });
 
-        res.cookies.set("token", token, {
+        res.cookies.set({
+            name: "token",
+            value: token,
             httpOnly: true,
-            secure: true,
-            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
             path: "/",
+            sameSite: "lax",
             maxAge: 60 * 60 * 24 * 7,
-        })
+        });
 
         return res;
     } catch (err) {
