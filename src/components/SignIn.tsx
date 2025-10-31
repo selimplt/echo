@@ -39,7 +39,7 @@ const SignIn = () => {
             if (message) {
                 setSuccessMessage(message || "giriş başarılı");
                 setErrorMessage(null);
-                
+                push();
             }
             if (error) {
                 setErrorMessage(error || "giriş başarılı");

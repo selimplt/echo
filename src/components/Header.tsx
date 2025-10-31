@@ -151,7 +151,7 @@ const Header = () => {
                             </div>
                             <button
                                 className='w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-left'
-                                onClick={() => router.push('/profile')}
+                                onClick={() => router.push('/settings')}
                             >
                                 <FaUser className='text-gray-500 text-sm' />
                                 <span className='text-sm font-medium'>Profilim</span>
