@@ -14,7 +14,7 @@ export const GET = async () => {
         const secret = process.env.JWT_KEY!;
         const decoded = jwt.verify(token, secret) as JwtPayload;
         const userId = decoded.id;
-        const { error, data } = await supabase.from("servers").select("created_by").single();
+        const { error, data } = await supabase.from("servers").select("created_by").eq("created_by", userId).single();
         if (error) {
             return NextResponse.json({ error: "db hatası" }, { status: 402 });
         }

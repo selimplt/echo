@@ -6,14 +6,14 @@ import { supabase } from "@/lib/supabaseClient";
 export const POST = async (req: Request) => {
     try {
         const { svName, svDescription, svPublic } = await req.json();
-        if (!svName || !svDescription || svPublic) {
-            return NextResponse.json({ error: "id yok" }, { status: 401 });
+        if (!svName || !svDescription || !svPublic) {
+            return NextResponse.json({ error: "eksik bilgi" }, { status: 403 });
         }
         const cookieStore = cookies();
         const token = (await cookieStore).get("token")?.value;
 
         if (!token) {
-            return NextResponse.json({ error: "yetkisiz" }, { status: 401 });
+            return NextResponse.json({ error: "yetkisiz" }, { status: 402 });
         }
 
         const secret = process.env.JWT_KEY!;
